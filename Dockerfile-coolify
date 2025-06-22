@@ -2,7 +2,7 @@ FROM node:20.18.0
 WORKDIR /app
 
 # Instalar pnpm via npm em vez de corepack
-RUN npm install -g pnpm@9.1.0 wrangler
+RUN npm install -g pnpm@9.4.0 wrangler
 
 # Resto do Dockerfile sem mudanças...
 COPY package.json pnpm-lock.yaml ./
