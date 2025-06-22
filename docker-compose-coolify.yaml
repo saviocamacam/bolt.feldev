@@ -22,6 +22,8 @@ services:
       - VITE_LOG_LEVEL=${VITE_LOG_LEVEL:-debug}
       - DEFAULT_NUM_CTX=${DEFAULT_NUM_CTX:-32768}
     restart: unless-stopped
+    networks:
+      - ollama-net
 
   app-dev:
     image: bolt-ai:development
@@ -62,6 +64,8 @@ services:
       - "5173:5173"
     command: pnpm run dev --host 0.0.0.0
     profiles: ["development", "default"]
+    networks:
+      - ollama-net
 
   app-prebuild:
     image: ghcr.io/stackblitz-labs/bolt.diy:latest 
@@ -80,3 +84,9 @@ services:
     command: pnpm run dockerstart
     profiles:
       - prebuilt
+    networks:
+      - ollama-net
+
+networks:
+  ollama-net:
+    external: true
